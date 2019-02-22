@@ -11,5 +11,11 @@ Vagrant.configure("2") do |config|
   config.vm.define "db" do |db|
     db.vm.box = "ubuntu/trusty64"
     db.vm.hostname = "db.vagrant.vm"
+    db.vm.provision "puppet" do |puppet|
+       puppet.manifests_path = "puppet/manifests"
+       puppet.manifest_file = "default.pp"
+       puppet.module_path = "puppet/modules"
+       puppet.hiera_config_path = "/puppet/hiera/yaml"
+    end
   end
 end
